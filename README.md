@@ -1,38 +1,131 @@
-# DefectPrediction 🔍  
-A machine learning system built using **GraphCodeBERT** to detect defective / vulnerable C/C++ functions based on the CodeXGLUE Devign dataset.
+
+# 🛠️ DefectPrediction – GraphCodeBERT-Based Vulnerability Detection
+
+This project uses **GraphCodeBERT**, fine-tuned on the **CodeXGLUE / Devign Defect Detection dataset**, to classify C/C++ functions as:
+
+- **Clean (0)** – Non-defective  
+- **Defective (1)** – Likely vulnerable or risky  
+
+The goal is to build a practical, developer-friendly tool that can detect potential code defects using state-of-the-art transformer models.
 
 ---
 
-## 🚀 Project Overview
-This project fine-tunes **GraphCodeBERT** on the **CodeXGLUE Defect Detection** dataset to classify code as:
+## 🚀 Features
 
-- **Clean (0)** – no vulnerability found  
-- **Defective (1)** – potential bug or vulnerability pattern
-
-The system uses:
-
-- ⚙️ GraphCodeBERT-base  
-- 🎯 Balanced training with augmentation  
-- ⚖️ Focal Loss  
-- 📉 Layer-wise learning rate decay (LLRD)  
-- 🪢 Early stopping  
-- 📊 Full evaluation on test set + threshold optimization  
-- 💻 A standalone inference script for local prediction
-
-Use this repo to run predictions locally, or integrate the model into your own applications.
+- ✔ Fine-tuned **GraphCodeBERT-base** model  
+- ✔ Local inference using Python  
+- ✔ Batch prediction (clean + defective examples)  
+- ✔ Terminal-friendly output  
+- ✔ Ready for dataset evaluation, integration into CI, or further fine-tuning  
 
 ---
 
-## 📦 Model
-The full trained model is available here:
+## 🔧 Model Download
 
-👉 **MODEL LINK (add your link here)**  
-*(Paste your HuggingFace or Google Drive link)*
+👉 **MODEL DOWNLOAD LINK:**  
+(Add your link here)
 
-You can load it in Python using:
+Place the downloaded model folder inside your project like this:
+
+```
+DefectPrediction/
+│
+├── final_graphcodebert_balanced_best/
+│   ├── config.json
+│   ├── model.safetensors
+│   ├── vocab.json
+│   ├── tokenizer.json
+│   ├── merges.txt
+│   └── ...
+│
+├── run_inference.py
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/SreehariU/DefectPrediction
+cd DefectPrediction
+
+python3 -m venv env
+source env/bin/activate
+
+pip install -r requirements.txt
+```
+
+---
+
+## ▶️ Running Inference
+
+Modify or use `run_inference.py`:
 
 ```python
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
+import torch
 
-model = AutoModelForSequenceClassification.from_pretrained("YOUR_MODEL_LINK")
-tokenizer = AutoTokenizer.from_pretrained("YOUR_MODEL_LINK")
+MODEL_DIR = "./final_graphcodebert_balanced_best"
+
+tokenizer = AutoTokenizer.from_pretrained(MODEL_DIR)
+model = AutoModelForSequenceClassification.from_pretrained(MODEL_DIR)
+
+pipe = pipeline(
+    "text-classification",
+    model=model,
+    tokenizer=tokenizer,
+    top_k=None,
+    device=-1
+)
+
+sample_code = """ 
+void swap(int *a, int *b){ int t=*a; *a=*b; *b=t; }
+"""
+
+out = pipe(sample_code)[0]
+clean_prob = out[0]["score"]
+defect_prob = out[1]["score"]
+prediction = "defective" if defect_prob > clean_prob else "clean"
+
+print("Prediction:", prediction)
+print("Defect probability:", defect_prob)
+```
+
+Run:
+
+```bash
+python run_inference.py
+```
+
+---
+
+## 🔍 Batch Testing
+
+`run_inference.py` also includes batch testing of 10 clean + 10 defective samples.
+
+---
+
+## 🧠 Dataset
+
+Trained on:
+
+- **CodeXGLUE – C/C++ Defect Detection (Devign)**  
+
+Each sample contains:
+
+- `func` → raw function code  
+- `target` → 0 (clean) or 1 (defective)
+
+---
+
+## 🤝 Contributing
+
+PRs welcome!  
+Ask for:  
+- Gradio UI  
+- FastAPI server  
+- Evaluation tools  
+- More datasets  
+
