@@ -23,7 +23,7 @@ The goal is to build a practical, developer-friendly tool that can detect potent
 ## 🔧 Model Download
 
 👉 **MODEL DOWNLOAD LINK:**  
-(Add your link here)
+https://drive.google.com/file/d/1Q3_x5eaYQ-jlntAgGuo9sau5Kic-P5r8/view?usp=sharing
 
 Place the downloaded model folder inside your project like this:
 
