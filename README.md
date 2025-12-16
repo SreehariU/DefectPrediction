@@ -56,7 +56,7 @@ DefectPrediction/
 ## 📥 Model Download (Required)
 
 ### 🔗 Download the trained model from Google Drive
-👉 **[PASTE YOUR GOOGLE DRIVE LINK HERE]**
+👉 **https://drive.google.com/file/d/1Q3_x5eaYQ-jlntAgGuo9sau5Kic-P5r8/view**
 
 ### 📂 Setup Steps
 
