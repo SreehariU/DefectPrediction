@@ -1,8 +1,40 @@
-cat > .gitignore <<'EOF'
+# =========================
+# macOS
+# =========================
+.DS_Store
+
+# =========================
+# Python
+# =========================
 env/
 venv/
 __pycache__/
 *.pyc
+.env
+
+# =========================
+# Node / Frontend
+# =========================
+node_modules/
+dist/
+build/
+.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+# Archives
+# =========================
 *.zip
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# ML MODEL (HOSTED EXTERNALLY)
+# =========================
 final_graphcodebert_balanced_best/
-EOF
+Backend/final_graphcodebert_balanced_best/
