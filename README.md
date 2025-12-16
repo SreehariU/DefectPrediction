@@ -152,7 +152,3 @@ This project is intended for **educational and research purposes**.
 
 ---
 
-## 👤 Author
-
-**Sreehari U P**  
-GitHub: https://github.com/SreehariU
