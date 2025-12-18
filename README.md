@@ -4,6 +4,18 @@
 DefectPrediction is a full-stack machine learning web application that detects security vulnerabilities in C/C++ source code.
 It combines **manual safety rules**, **static heuristics**, and **deep learning inference** using a fine-tuned **GraphCodeBERT** model to reduce false positives and improve reliability.
 
+## 🧠 Architecture Overview
+
+<p align="center">
+  <img src="images/arch.png" width="800" />
+</p>
+
+## 🎨 Application Interface
+
+<p align="center">
+  <img src="images/PHOTO-2025-12-17-01-53-48.jpg" width="900" />
+</p>
+
 ---
 
 ## 🚀 Features
